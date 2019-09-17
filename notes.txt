@@ -1,0 +1,47 @@
+## Server-side notes
+
+https://stackoverflow.com/questions/43161353/recordstotal-recordsfiltered-explanation-jquery-datatable
+
+From the (official documentation)[https://datatables.net/manual/server-side#Returned-data]:
+
+```
+recordsTotal
+   Total records, before filtering (i.e. the total number of records in the database)
+
+recordsFiltered
+   Total records, after filtering (i.e. the total number of records after filtering has been applied - not just the number of records being returned for this page of data).
+```
+
+Response should be:
+
+```
+{
+    "draw": 1,
+    "recordsTotal": 10000,
+    "recordsFiltered": 3000,
+    "data": [
+       // ... skipped 20 records ...
+    ]
+}
+```
+
+https://datatables.net/forums/discussion/25985/resolved-datatables-server-side-problem-to-pagination-number-of-page-not-correct~
+
+Initiate request:
+```
+$('#datatables-4').dataTable( {
+"processing": true,
+"serverSide": true,
+"order": [[ 3, "desc" ]],
+"ajax": baseUrl+"shoes/ProcessingDatatables"
+}
+```
+
+- Perhaps it should say recordsTotal: BIG NUMBER and recordsFiltered: small nubers
+
+
+
+
+
+
+
